@@ -1,23 +1,46 @@
-"""
-Awesome AI Toolkit - A comprehensive library for AI agents, RAG, and web scraping.
-"""
+# pyproject.toml
 
-__version__ = "0.1.0"
-__author__ = "Your Name"
+[build-system]
+requires = ["setuptools>=61.0.0", "wheel"]
+build-backend = "setuptools.build_meta"
 
-# Import key classes/functions from subpackages for convenience
-from .agents import OpenAIAgent, AnthropicAgent
-from .rag import VectorStore, Retriever
-from .scrapers import NewsScraper, LinkedInScraper
-from .common.exceptions import ToolkitError, AgentError, RAGError, ScraperError
+[project]
+name = "The-Grand-House-of-Avneesh"
+version = "0.0.0"
+description = "The Grand House of Avneesh is a private sanctuary of knowledge, built upon discipline, inquiry, and intellectual sovereignty. It stands as a living archive of ideas — preserving wisdom, cultivating reason, and fostering mastery across generations. Within its walls, thought is sharpened, curiosity is honored, and knowledge is treated not as information, but as power."
+readme = "README.md"
+requires-python = ">=3.9"
+authors = [{ name = "Avneesh", email = "ofc.avneesh@gmail.com" }]
+license = { file = "LICENSE" }
 
-# Define what's available when someone does: from awesome_ai_toolkit import *
-__all__ = [
-    "OpenAIAgent",
-    "AnthropicAgent", 
-    "VectorStore",
-    "Retriever",
-    "NewsScraper",
-    "LinkedInScraper",
-    "ToolkitError",
+classifiers = [
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python",
+    "Programming Language :: Python :: 3",
+    "Operating System :: MacOS :: MacOS X",
+    "Operating System :: Microsoft :: Windows",
+    "Intended Audience :: Education"
+]
+
+dependencies = [
+    "requests",
+    "tavily-python",
+    "langchain==0.3.27",
+    "langchain-aws==0.2.35",
+    "langchain-community==0.3.27",
+    "langchain-core==0.3.79",
+    "boto3",
+    "pydantic",
+    "python-docx",
+    "python-dotenv"
+]
+
+
+[project.optional-dependencies]
+dev = [
+    "setuptools",
+    "wheel",
+    "build",
+    "twine",
+    "pytest"
 ]
