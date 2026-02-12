@@ -24,13 +24,13 @@ from datetime import datetime
 
 try:
     # When installed as package
-    from .utils.config.settings import SummarizerConfig
-    from .utils.nlp.text_processor import parse_structure, extract_facts
-    from .utils.nlp.sentence_ranker import rank_and_filter_sentences
-    from .utils.llm.bedrock_client import BedrockClient
-    from .utils.llm.synthesis import synthesize_summary
-    from .utils.metrics.calculator import calculate_metrics
-    from .utils.exceptions import (
+    from the_grand_house_of_avneesh.summary.utils.config.settings import SummarizerConfig
+    from the_grand_house_of_avneesh.summary.utils.nlp.text_processor import parse_structure, extract_facts
+    from the_grand_house_of_avneesh.summary.utils.nlp.sentence_ranker import rank_and_filter_sentences
+    from the_grand_house_of_avneesh.summary.utils.llm.bedrock_client import BedrockClient
+    from the_grand_house_of_avneesh.summary.utils.llm.synthesis import synthesize_summary
+    from the_grand_house_of_avneesh.summary.utils.metrics.calculator import calculate_metrics
+    from the_grand_house_of_avneesh.summary.utils.exceptions import (
         SummarizationError, 
         NLPProcessingError,
         ValidationError,
