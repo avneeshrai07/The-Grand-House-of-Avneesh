@@ -2,7 +2,7 @@
 Metrics calculation utilities for summarization performance
 """
 
-from typing import Dict, Any
+from typing import Dict, Any, Tuple, List
 import logging
 
 logger = logging.getLogger(__name__)

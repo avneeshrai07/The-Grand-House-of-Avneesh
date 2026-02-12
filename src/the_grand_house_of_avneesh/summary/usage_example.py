@@ -4,8 +4,8 @@ Demonstrates basic and advanced usage patterns
 """
 
 import asyncio
-from text_summarizer import TextSummarizer
-from src.the_grand_house_of_avneesh.summary.utility.exceptions import SummarizationError, NLPProcessingError
+from the_grand_house_of_avneesh.summary import create_summarizer
+from the_grand_house_of_avneesh.summary.utils.exceptions import NLPProcessingError, SummarizationError
 
 
 async def basic_example():
@@ -36,35 +36,13 @@ async def basic_example():
     """
     
     # Initialize summarizer
-    summarizer = TextSummarizer(
-        score_threshold=0.6,
-        min_sentences=3,
-        max_sentences=10,
-        debug=True
+    summarizer = await create_summarizer(
+        text=text,
+        aws_access_key="",
+        aws_secret_key=""
     )
+    print(summarizer)
     
-    # Generate summary
-    try:
-        result = await summarizer.summarize(text)
-        
-        print("\n" + "="*80)
-        print("SUMMARY RESULT")
-        print("="*80)
-        print(result["summary"])
-        print("\n" + "="*80)
-        print("METRICS")
-        print("="*80)
-        for key, value in result["metrics"].items():
-            print(f"{key}: {value}")
-        print("\n" + "="*80)
-        print("DEBUG INFO")
-        print("="*80)
-        for key, value in result["debug_info"].items():
-            print(f"{key}: {value}")
-            
-    except (SummarizationError, NLPProcessingError) as e:
-        print(f"Error: {e}")
-
 
 async def advanced_example():
     """Advanced usage with custom configuration"""
@@ -97,60 +75,20 @@ async def advanced_example():
     aims to limit global warming to well below 2 degrees Celsius.
     """
     
-    # Custom configuration
-    summarizer = TextSummarizer(
-        score_threshold=0.75,  # Higher threshold - more selective
-        min_sentences=2,
-        max_sentences=8,
-        temperature=0.2,  # Lower temperature - more deterministic
-        max_tokens=2048,
-        debug=False  # Less verbose output
+    summarizer = await create_summarizer(
+        text=text,
+        aws_access_key="",
+        aws_secret_key=""
     )
+    print(summarizer)
     
-    try:
-        result = await summarizer.summarize(text)
-        
-        print("\nSUMMARY:")
-        print("-" * 80)
-        print(result["summary"])
-        print("\nCOMPRESSION:")
-        print("-" * 80)
-        print(f"Original: {result['metrics']['original_words']} words")
-        print(f"Summary: {result['metrics']['compressed_words']} words")
-        print(f"Reduction: {result['metrics']['reduction_percentage']}")
-        
-    except Exception as e:
-        print(f"Error: {e}")
-
-
-async def batch_example():
-    """Process multiple texts in batch"""
-    print("\n\n" + "="*80)
-    print("BATCH PROCESSING EXAMPLE")
-    print("="*80)
-    
-    texts = [
-        "Python is a high-level programming language. It was created by Guido van Rossum.",
-        "TypeScript is a superset of JavaScript that adds static typing.",
-        "React is a JavaScript library for building user interfaces."
-    ]
-    
-    summarizer = TextSummarizer(debug=False)
-    
-    for i, text in enumerate(texts, 1):
-        print(f"\n--- Text {i} ---")
-        try:
-            result = await summarizer.summarize(text)
-            print(f"Summary: {result['summary'][:100]}...")
-        except Exception as e:
-            print(f"Error: {e}")
 
 
 async def main():
     """Run all examples"""
     await basic_example()
     await advanced_example()
-    await batch_example()
+
 
 
 if __name__ == "__main__":
