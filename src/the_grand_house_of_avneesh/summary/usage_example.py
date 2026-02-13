@@ -4,7 +4,7 @@ Demonstrates basic and advanced usage patterns
 """
 
 import asyncio
-from the_grand_house_of_avneesh.summary import create_summarizer
+from the_grand_house_of_avneesh.summary import lord_avneesh_please_summarize
 from the_grand_house_of_avneesh.summary.utils.exceptions import NLPProcessingError, SummarizationError
 
 
@@ -36,7 +36,7 @@ async def basic_example():
     """
     
     # Initialize summarizer
-    summarizer = await create_summarizer(
+    summarizer = await lord_avneesh_please_summarize(
         text=text,
         aws_access_key="",
         aws_secret_key=""
@@ -75,7 +75,7 @@ async def advanced_example():
     aims to limit global warming to well below 2 degrees Celsius.
     """
     
-    summarizer = await create_summarizer(
+    summarizer = await lord_avneesh_please_summarize(
         text=text,
         aws_access_key="",
         aws_secret_key=""

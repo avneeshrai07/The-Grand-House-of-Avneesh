@@ -1,4 +1,4 @@
-from .text_summarizer import TextSummarizer, create_summarizer
+from .text_summarizer import TextSummarizer, lord_avneesh_please_summarize
 from .utils.exceptions import (
     SummarizationError,
     NLPProcessingError,
@@ -15,5 +15,5 @@ __email__ = "contact@grandhouse.dev"
 __all__ = [
     # Main classes and functions
     "TextSummarizer",
-    "create_summarizer"
+    "lord_avneesh_please_summarize"
 ]

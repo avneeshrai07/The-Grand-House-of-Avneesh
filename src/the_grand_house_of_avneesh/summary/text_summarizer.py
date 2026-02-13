@@ -3,9 +3,9 @@ TextSummarizer Library - Production-Ready Text Summarization API
 A modular 4-stage NLP pipeline with AWS Bedrock LLM integration
 
 Usage:
-    from text_summarizer import create_summarizer
+    from text_summarizer import lord_avneesh_please_summarize
 
-    result = await create_summarizer(
+    result = await lord_avneesh_please_summarize(
         aws_access_key="your-key",
         aws_secret_key="your-secret",
         text="Your long text to summarize...",
@@ -314,7 +314,7 @@ class TextSummarizer:
         return SummarizerConfig(**config_dict)
 
 
-async def create_summarizer(
+async def lord_avneesh_please_summarize(
     text: str,
     aws_access_key: str,
     aws_secret_key: str,
@@ -387,7 +387,7 @@ async def create_summarizer(
         SummarizationError: If summarization fails
 
     Example:
-        >>> result = await create_summarizer(
+        >>> result = await lord_avneesh_please_summarize(
         ...     text="Your long article text here...",
         ...     aws_access_key="AKIAIOSFODNN7EXAMPLE",
         ...     aws_secret_key="wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY",
@@ -404,7 +404,7 @@ async def create_summarizer(
             "❌ REQUIRED PARAMETER MISSING: 'text'\n"
             "\nThe 'text' parameter is required and cannot be empty.\n"
             "\nExample usage:\n"
-            "  result = await create_summarizer(\n"
+            "  result = await lord_avneesh_please_summarize(\n"
             "      text='Your long text to summarize...',\n"
             "      aws_access_key='your-key',\n"
             "      aws_secret_key='your-secret'\n"
@@ -420,7 +420,7 @@ async def create_summarizer(
             "❌ AWS CREDENTIALS MISSING\n"
             "\nYou must provide AWS credentials either:\n"
             "\n1. As parameters:\n"
-            "   result = await create_summarizer(\n"
+            "   result = await lord_avneesh_please_summarize(\n"
             "       text='...',\n"
             "       aws_access_key='AKIAIOSFODNN7EXAMPLE',\n"
             "       aws_secret_key='wJalrXUtnFEMI/K7MDENG/...'\n"
