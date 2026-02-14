@@ -7,6 +7,12 @@ import asyncio
 from the_grand_house_of_avneesh.summary import lord_avneesh_please_summarize
 from the_grand_house_of_avneesh.summary.utils.exceptions import NLPProcessingError, SummarizationError
 
+from pydantic import BaseModel
+from typing import List
+
+class Summary_schema(BaseModel):
+    summary : str
+    keypoints: List[str]
 
 async def basic_example():
     """Basic summarization example"""
@@ -39,7 +45,8 @@ async def basic_example():
     summarizer = await lord_avneesh_please_summarize(
         text=text,
         aws_access_key="",
-        aws_secret_key=""
+        aws_secret_key="",
+        output_schema=Summary_schema
     )
     print(summarizer)
     
@@ -87,7 +94,7 @@ async def advanced_example():
 async def main():
     """Run all examples"""
     await basic_example()
-    await advanced_example()
+    # await advanced_example()
 
 
 

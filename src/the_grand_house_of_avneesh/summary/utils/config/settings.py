@@ -5,8 +5,8 @@ Configuration settings for the text summarizer
 import os
 from dataclasses import dataclass
 from typing import Optional
-
-
+from pydantic import BaseModel
+from the_grand_house_of_avneesh.summary.utils.schema.summary_schema_file import Summary_schema
 @dataclass
 class SummarizerConfig:
     """Configuration class for TextSummarizer"""
@@ -16,6 +16,7 @@ class SummarizerConfig:
     min_sentences: int = 3
     max_sentences: int = 15
 
+    output_schema: BaseModel = Summary_schema
     # AWS Bedrock settings
     model_id: str = os.getenv("MODEL_ID", "amazon.nova-lite-v1:0")
     region_name: str = os.getenv("AWS_REGION", "ap-southeast-2")

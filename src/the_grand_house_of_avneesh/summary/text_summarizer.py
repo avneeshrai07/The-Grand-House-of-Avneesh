@@ -21,13 +21,14 @@ import os
 from typing import Dict, Any, Optional
 import logging
 from datetime import datetime
-
+from pydantic import BaseModel
 from the_grand_house_of_avneesh.summary.utils.config.settings import SummarizerConfig
 from the_grand_house_of_avneesh.summary.utils.nlp.text_processor import parse_structure, extract_facts
 from the_grand_house_of_avneesh.summary.utils.nlp.sentence_ranker import rank_and_filter_sentences
 from the_grand_house_of_avneesh.summary.utils.llm.bedrock_client import BedrockClient
 from the_grand_house_of_avneesh.summary.utils.llm.synthesis import synthesize_summary
 from the_grand_house_of_avneesh.summary.utils.metrics.calculator import calculate_metrics
+from the_grand_house_of_avneesh.summary.utils.schema.summary_schema_file import Summary_schema
 from the_grand_house_of_avneesh.summary.utils.exceptions import (
     SummarizationError, 
     NLPProcessingError,
@@ -41,6 +42,8 @@ logging.basicConfig(
     format='%(asctime)s - %(name)s - %(levelname)s - %(message)s'
 )
 logger = logging.getLogger(__name__)
+
+
 
 
 class TextSummarizer:
@@ -227,6 +230,7 @@ class TextSummarizer:
             # Stage 4: Enhanced LLM Synthesis
             summary, token_usage = await synthesize_summary(
                 bedrock_client=self.bedrock_client,
+                output_schema=config.output_schema,
                 sentences=top_sentences,
                 entities=entities,
                 key_phrases=key_phrases,
@@ -318,6 +322,7 @@ async def lord_avneesh_please_summarize(
     text: str,
     aws_access_key: str,
     aws_secret_key: str,
+    output_schema : BaseModel = None,
     model_id: str = "amazon.nova-lite-v1:0",
     region_name: str = "ap-southeast-2",
     min_sentences: int = 3,
@@ -468,6 +473,7 @@ async def lord_avneesh_please_summarize(
             score_threshold=score_threshold,
             min_sentences=min_sentences,
             max_sentences=max_sentences,
+            output_schema=output_schema,
             model_id=model_id,
             region_name=region_name,
             temperature=temperature,
@@ -477,6 +483,7 @@ async def lord_avneesh_please_summarize(
     except Exception as e:
         raise ConfigurationError(f"Failed to create configuration: {str(e)}")
 
+    # print("configurations:      ", config)
     # Create summarizer and process
     try:
         summarizer = TextSummarizer(config)

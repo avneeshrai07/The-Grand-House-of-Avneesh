@@ -6,7 +6,7 @@ Handles initialization and async invocation
 from langchain_aws import ChatBedrock
 from typing import Dict, Any, Optional
 import logging
-
+from pydantic import BaseModel
 logger = logging.getLogger(__name__)
 
 
@@ -56,6 +56,7 @@ class BedrockClient:
         self,
         system_prompt: str,
         user_prompt: str,
+        output_schema: BaseModel,
         debug: bool = False
     ) -> str:
         """
@@ -78,7 +79,8 @@ class BedrockClient:
                 logger.info(f"User Prompt Length: {len(user_prompt)} chars")
                 logger.info(f"User Prompt Preview: {user_prompt[:200]}...")
 
-            response = await self.llm.ainvoke([
+            structured_llm = self.llm.with_structured_output(output_schema)
+            response = await structured_llm.ainvoke([
                 {"role": "system", "content": system_prompt},
                 {"role": "user", "content": user_prompt}
             ])

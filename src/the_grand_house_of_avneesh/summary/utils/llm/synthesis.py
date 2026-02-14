@@ -5,7 +5,7 @@ Builds prompts and processes LLM responses
 
 from typing import List, Dict, Tuple, Any
 import logging
-
+from pydantic import BaseModel
 logger = logging.getLogger(__name__)
 
 
@@ -71,6 +71,7 @@ def build_synthesis_prompt(
 
 async def synthesize_summary(
     bedrock_client,
+    output_schema: BaseModel,
     sentences: List[str],
     entities: List[Dict],
     key_phrases: List[str],
@@ -137,6 +138,7 @@ async def synthesize_summary(
         summary = await bedrock_client.invoke(
             system_prompt=system_prompt,
             user_prompt=user_context,
+            output_schema=output_schema,
             debug=debug
         )
 
